@@ -38,7 +38,7 @@ for i, (v, s, k) in enumerate([(fz, fzs, "frozen"), (lo, los, "lora")]):
     b = ax[0].bar(x + (i - .5) * w, np.array(v) * 100, w, yerr=np.array(s) * 100, capsize=3, color=C[k],
                   label="Frozen DINOv2-S + LR" if k == "frozen" else "LoRA DINOv2-S")
     ax[0].bar_label(b, fmt="%.1f", fontsize=7.5, padding=2)
-ax[0].set_xticks(x, ["Official\nsplit", "Copy-free\ntest subset", "Group\nsplit"]); ax[0].set_ylabel("Accuracy (%)")
+ax[0].set_xticks(x, ["Mirror\nsplit", "Copy-free\ntest subset", "Group\nsplit"]); ax[0].set_ylabel("Accuracy (%)")
 ax[0].set_ylim(60, 106); ax[0].set_title("(a) South Asia set", fontsize=10)
 fig.legend(*ax[0].get_legend_handles_labels(), fontsize=8, frameon=False, loc="upper center", ncol=2)
 md = e25["dinov2s"]["exp2_matsyadx_within"]; x2 = np.arange(2)

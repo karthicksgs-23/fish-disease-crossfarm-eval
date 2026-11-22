@@ -21,6 +21,7 @@ The scripts write their outputs to `results/` and `figures/` (create both before
 | Script | Purpose |
 |---|---|
 | `audit_southasia.py` | export South Asia images, MD5 + pHash duplicate audit, `results/southasia_meta.csv` |
+| `map_kaggle_split.py` | match the Hugging Face mirror to the original Kaggle files; check the Kaggle train/test split for copies |
 | `dl_matsyadx.sh`, `prep_matsyadx.py` | download and unpack MatsyaDx-BD v2, `results/matsyadx_meta.csv` (fish ids) |
 | `extract_features.py` | frozen DINOv2-S and ResNet-50 features (`results/feat_*.npy`) |
 | `regroup_strict.py` | stricter groups: pHash groups merged with DINOv2 cosine ≥ 0.85 links |
@@ -48,7 +49,8 @@ pip install -r requirements.txt
 
 The datasets are not included; download them yourself and respect their licences.
 
-- **South Asia set:** Hugging Face mirror of the Kaggle "Freshwater Fish Disease Aquaculture in South Asia" data,
+- **South Asia set** (CC0 1.0): Kaggle "Freshwater Fish Disease Aquaculture in South Asia",
+  <https://www.kaggle.com/datasets/subirbiswas19/freshwater-fish-disease-aquaculture-in-south-asia>; the scripts read its Hugging Face mirror,
   <https://huggingface.co/datasets/panda992/fish_disease_datasets>. Place `train.parquet` and `test.parquet` in `data/southasia/`.
 - **MatsyaDx-BD v2** (CC BY 4.0): <https://doi.org/10.17632/sxkynv9t7n.2>. `code/dl_matsyadx.sh` downloads the four archives into `data/matsyadx/`.
 
@@ -64,6 +66,7 @@ python code/extract_features.py results/southasia_meta.csv results/feat_southasi
 python code/extract_features.py results/matsyadx_meta.csv  results/feat_matsyadx
 python code/regroup_strict.py
 python code/build_cache.py
+python code/map_kaggle_split.py
 
 # frozen-feature experiments (SA_GROUP=group_strict uses the stricter groups)
 SA_GROUP=group_strict python code/exp_within_southasia.py
